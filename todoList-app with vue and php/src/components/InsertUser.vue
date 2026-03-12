@@ -98,7 +98,7 @@ export default {
   methods: {
   exportToExcel() {
   axios.get(
-    'http://localhost/php-oop-2026/php-project/todoList-app/api/action.php?export=excel',
+    'https://krishnavibes.free.nf/vuejsPhpTodo/api/action.php?export=excel',
     { responseType: 'blob' }
   ).then(res => {
 
@@ -137,4 +137,5 @@ export default {
     window.removeEventListener("keydown", this.addNewUser)
   },
 }
+
 </script>
