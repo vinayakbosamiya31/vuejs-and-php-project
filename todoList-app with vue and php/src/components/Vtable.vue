@@ -87,7 +87,7 @@ export default {
     // show user
     fetchUsers() {
       this.loading = true;
-      axios.post('http://localhost/php-oop-2026/php-project/todoList-app/api/action.php', { action: 'view' }).then(res => {
+      axios.post('https://krishnavibes.free.nf/vuejsPhpTodo/api/action.php', { action: 'view' }).then(res => {
 
         if(res.data.length>0){
           this.users = res.data;
@@ -195,5 +195,6 @@ export default {
 .action-icon:focus {
   outline: none;
 }
+
 
 </style>
