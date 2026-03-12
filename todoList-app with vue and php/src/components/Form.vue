@@ -29,7 +29,8 @@ export default{
     },
     methods:{
         submitform(){
-            axios.post('http://localhost/php-oop-2026/php-project/todoList-app/api/action.php',{
+            // axios.post('http://localhost/php-oop-2026/php-project/todoList-app/api/action.php',{
+            axios.post('https://krishnavibes.free.nf/vuejsPhpTodo/api/action.php',{
                 action:'insert',
                 name:this.name,
                 email:this.email,
@@ -64,4 +65,5 @@ export default{
     }
 }
 </script>
+
 
