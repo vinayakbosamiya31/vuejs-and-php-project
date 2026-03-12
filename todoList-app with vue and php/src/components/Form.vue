@@ -1,0 +1,67 @@
+<!-- Form.vue -->
+<template>
+    <v-container>
+        <v-form @submit.prevent="submitform">
+            <v-text-field ref="nameField" autofocus name="Name" label="Name" v-model="name"></v-text-field>
+            <v-text-field name="Email" label="Email" v-model="email"></v-text-field>
+            <v-text-field name="Phone" label="Phone" v-model="phone"></v-text-field>
+            <v-btn block color="primary" type="submit">Submit</v-btn>
+        </v-form>
+    </v-container>
+</template>
+
+<script>
+import axios from 'axios';
+export default{
+    emits:['update:dialog'],
+    
+    data(){
+        return{
+            name:"",
+            email:"",
+            phone:"",
+        }
+    },
+    props:{
+        dialog:Boolean,
+        EditUserdialog:Boolean,
+        
+    },
+    methods:{
+        submitform(){
+            axios.post('http://localhost/php-oop-2026/php-project/todoList-app/api/action.php',{
+                action:'insert',
+                name:this.name,
+                email:this.email,
+                phone:this.phone,
+
+            }).then(res=>{
+                console.log(res.data)                
+                if(res.data.status === "success"){
+                    alert("success inster!")
+                }
+            })
+            
+            // console.log("name: ",this.name)
+            // console.log("email: ",this.email)
+            // console.log("phone: ",this.phone)
+
+            this.$emit("update:dialog",false)
+            // this.$emit("update:EditUserdialog",false)
+            
+            
+
+        }
+    },
+    watch:{
+        dialog(newVal){
+            if(newVal){
+                this.$nextTick(()=>{
+                    this.$refs.nameField.focus();
+                })
+            }
+        }
+    }
+}
+</script>
+
