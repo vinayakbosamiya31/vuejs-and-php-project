@@ -1,5 +1,8 @@
 <!-- Vtable -->
 <template>
+  <div v-if="errorMessage" style="color:red; margin:10px;">
+  {{ errorMessage }}
+</div>
   <v-data-table class="mytable" :items="users" :loading="loading" :items-per-page="10" :headers="headers">
     <template #item.action="{ item }">
       <v-tooltip v-for="(ac, name) in Action" :key="name" location="top">
@@ -55,6 +58,7 @@ export default {
   
   data() {
     return {
+       errorMessage: "",
       formData: {
     Id:   '',
     Name: '',
@@ -87,19 +91,19 @@ export default {
     // show user
     fetchUsers() {
       this.loading = true;
-      axios.post('https://krishnavibes.free.nf/vuejsPhpTodo/api/action.php', { action: 'view' }).then(res => {
+     axios.post(
+  "https://krishnavibes.free.nf/vuejsPhpTodo/api/action.php",
+  { action: "view" }
+)
+.then(res => {
+  this.users = res.data
+})
+.catch(error => {
+  console.log(error)
 
-        if(res.data.length>0){
-          this.users = res.data;
-        }else{
-          console.log("Data Is Not Found");
-        }
-        // console.log( res.data)
-      }).catch(error => {
-        console.log(error)
-      }).finally(() => { this.loading = false });
-      console.log(this.users)
-    },
+  // show error in frontend
+  this.errorMessage = "Backend API connection failed"
+})
 
 
     // delete row
@@ -198,3 +202,4 @@ export default {
 
 
 </style>
+
